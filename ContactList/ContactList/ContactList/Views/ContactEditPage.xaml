@@ -6,10 +6,19 @@
              mc:Ignorable="d"
              x:Class="ContactList.Views.ContactEditPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout VerticalOptions="FillAndExpand">
+            <Entry Placeholder="Name"
+                   Text="{Binding Contact.Name}"/>
+            <Entry Placeholder="Number"
+                   Text="{Binding Contact.Number}"/>
+            <Button Text="Add"
+                    TextColor="White"
+                    Command="{Binding CreateContactCommand}"
+                    BackgroundColor="Black"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="EndAndExpand"
+                    Margin="5"
+                    />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,19 +1,29 @@
-﻿using ContactList.Views;
-using System;
+﻿using ContactList.Data.DAO;
+using ContactList.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace ContactList
 {
 	public partial class App : Application
 	{
+		static ContactDAO database;
+
+		public static ContactDAO Database
+		{
+			get
+			{
+				if(database == null)
+				{
+					database = new ContactDAO();
+				}
+				return database;
+			}
+		}
 		public App()
 		{
 			InitializeComponent();
-
-			MainPage = new ContactListPage();
+			MainPage = new NavigationPage(new ContactListPage());
 		}
-
 		protected override void OnStart()
 		{
 		}

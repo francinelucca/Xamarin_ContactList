@@ -13,10 +13,16 @@ namespace ContactList.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ContactListPage : ContentPage
 	{
+		private ContactListPageViewModel Vm;
 		public ContactListPage()
 		{
 			InitializeComponent();
-			this.BindingContext = new ContactListPageViewModel();
+			this.BindingContext = this.Vm = new ContactListPageViewModel();
+		}
+		protected async override void OnAppearing()
+		{
+			base.OnAppearing();
+			this.Vm.RefreshContactsData();
 		}
 	}
 }
