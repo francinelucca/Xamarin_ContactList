@@ -9,16 +9,24 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
             <Entry Placeholder="Name"
-                   Text="{Binding Contact.Name}"/>
+                   Text="{Binding Contact.Name}"
+                   Margin="5,0"/>
             <Entry Placeholder="Number"
-                   Text="{Binding Contact.Number}"/>
+                   Text="{Binding Contact.Number}">
+                <Entry.Margin >
+                    <OnPlatform x:TypeArguments="Thickness" 
+                                        Android="5,0,5,0"
+                                        iOS="5,20,5,0"
+                                        />
+                </Entry.Margin>
+            </Entry>
             <Button Text="Add"
                     TextColor="White"
                     Command="{Binding CreateContactCommand}"
                     BackgroundColor="Black"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="EndAndExpand"
-                    Margin="5"
+                    Margin="5,10"
                     />
         </StackLayout>
     </ContentPage.Content>
