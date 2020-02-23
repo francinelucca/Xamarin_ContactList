@@ -1,20 +1,6 @@
 # Xamarin_ContactList
 Basic Contact List App that supports CRUD operations using Xamarin Forms
 
-
-## iOS Visuals (Iphone 8):
-### Contact List Page
-
-
-### Contact Context Menu
-
-
-### Contact Action Sheet Options
-
-
-### Contact Edit
-
-
 ## Android Visuals (Pixel 2):
 
 ### Contact List Page
@@ -31,3 +17,19 @@ Basic Contact List App that supports CRUD operations using Xamarin Forms
 
 ### Contact Edit
 ![ContactEdit](Images/Android/NewContactView.png)
+
+
+
+
+## iOS Visuals (Iphone 8):
+### Contact List Page
+![ContactList](Images/iOS/ContactListView.png)
+
+### Contact Context Menu
+![ContactContextMenu](Images/iOS/ContextActionMenu.png)
+
+### Contact Action Sheet Options
+![ContactActionSheet](Images/iOS/ContactActionSheetMenu.png)
+
+### Contact Edit
+![ContactEdit](Images/iOS/NewContactView.png)
