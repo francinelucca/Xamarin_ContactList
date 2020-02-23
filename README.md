@@ -21,7 +21,7 @@ Basic Contact List App that supports CRUD operations using Xamarin Forms
 
 
 
-## iOS Visuals (Iphone 8):
+## iOS Visuals (Iphone 11):
 ### Contact List Page
 ![ContactList](Images/iOS/ContactListView.jpg)
 
