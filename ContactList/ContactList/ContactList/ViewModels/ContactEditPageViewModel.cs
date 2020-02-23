@@ -12,12 +12,15 @@ namespace ContactList.ViewModels
 	{
 		public event PropertyChangedEventHandler PropertyChanged;
 		public Contact Contact { get; set; }
+
+		public string ViewTitle { get; set; }
 		
 		public ICommand CreateContactCommand { get; set; }
 
 		public ContactEditPageViewModel(Contact contact)
 		{
 			this.Contact = contact ?? new Contact();
+			this.ViewTitle = contact == null ? "New Contact" : "Edit Contact";
 
 			this.CreateContactCommand = new Command(async() =>
 			{
