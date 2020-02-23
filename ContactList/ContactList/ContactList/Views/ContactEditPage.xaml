@@ -9,14 +9,20 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
             <Entry Placeholder="Name"
-                   Text="{Binding Contact.Name}"
-                   Margin="5,0"/>
+                   Text="{Binding Contact.Name}">
+            <Entry.Margin >
+                <OnPlatform x:TypeArguments="Thickness" 
+                                        Android="5,0,5,0"
+                                        iOS="5,10,5,0"
+                                        />
+            </Entry.Margin>
+            </Entry>
             <Entry Placeholder="Number"
                    Text="{Binding Contact.Number}">
                 <Entry.Margin >
                     <OnPlatform x:TypeArguments="Thickness" 
                                         Android="5,0,5,0"
-                                        iOS="5,20,5,0"
+                                        iOS="5,10,5,0"
                                         />
                 </Entry.Margin>
             </Entry>

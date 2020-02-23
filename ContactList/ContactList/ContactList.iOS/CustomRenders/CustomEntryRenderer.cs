@@ -32,7 +32,7 @@ namespace ContactList.iOS.CustomRenders
             {
                 BorderColor = UIColor.FromRGB(244, 244, 244).CGColor,
                 BackgroundColor = UIColor.FromRGB(244, 244, 244).CGColor,
-                Frame = new CGRect(0, Frame.Height / 2, Frame.Width + 100, 1f)
+                Frame = new CGRect(0, Frame.Height / 2, Frame.Width + 80, 1f)
             };
 
             Control.Layer.AddSublayer(_line);
