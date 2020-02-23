@@ -4,6 +4,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -40,43 +41,54 @@ namespace ContactList.ViewModels
 
 			this.MoreOptionsCommand = new Command<Contact>(async (Contact contact) =>
 			{
-				string callContactAction = String.Format("{0} {1}", ACTION_CALL, contact.Number);
-				string action = await App.Current.MainPage.DisplayActionSheet(null, ACTION_CANCEL, null, callContactAction, ACTION_EDIT_CONTACT);
-
-				if(action == ACTION_CANCEL)
-				{
-					return;
-				}
-				else if(action == ACTION_EDIT_CONTACT)
-				{
-					await App.Current.MainPage.Navigation.PushAsync(new ContactEditPage(contact));
-				}
-				else if(action == callContactAction)
-				{
-					try
-					{
-						PhoneDialer.Open(contact.Number);
-					}
-					catch(ArgumentNullException anEx)
-					{
-						await App.Current.MainPage.DisplayAlert("Error Occurred",
-																"Please verify that the contact number is a valid phone number",
-																"Ok");
-					}
-					catch(FeatureNotSupportedException ex)
-					{
-						await App.Current.MainPage.DisplayAlert("Error Occurred", 
-																"Cannot Open Phone Dialer on this device, please dial number manually", 
-																"Ok");
-					}
-					catch(Exception ex)
-					{
-						await App.Current.MainPage.DisplayAlert("Error Occurred",
-																"Unexpected Error, Please contact administrator",
-																"Ok");
-					}
-				}
+				await this.ShowActionSheetWithOptions(contact);
 			});
+		}
+
+		public async Task ShowActionSheetWithOptions(Contact contact)
+		{
+			string callContactAction = String.Format("{0} {1}", ACTION_CALL, contact.Number);
+			string action = await App.Current.MainPage.DisplayActionSheet(null, ACTION_CANCEL, null, callContactAction, ACTION_EDIT_CONTACT);
+
+			if (action == ACTION_CANCEL)
+			{
+				return;
+			}
+			else if (action == ACTION_EDIT_CONTACT)
+			{
+				await App.Current.MainPage.Navigation.PushAsync(new ContactEditPage(contact));
+			}
+			else if (action == callContactAction)
+			{
+				await this.OpenPhoneDialer(contact.Number);
+			}
+			}
+
+		public async Task OpenPhoneDialer(string contactNumber)
+		{
+
+			try
+			{
+				PhoneDialer.Open(contactNumber);
+			}
+			catch (ArgumentNullException anEx)
+			{
+				await App.Current.MainPage.DisplayAlert("Error Occurred",
+														"Please verify that the contact number is a valid phone number",
+														"Ok");
+			}
+			catch (FeatureNotSupportedException ex)
+			{
+				await App.Current.MainPage.DisplayAlert("Error Occurred",
+														"Cannot Open Phone Dialer on this device, please dial number manually",
+														"Ok");
+			}
+			catch (Exception ex)
+			{
+				await App.Current.MainPage.DisplayAlert("Error Occurred",
+														"Unexpected Error, Please contact administrator",
+														"Ok");
+			}
 		}
 
 		public void RefreshContactsData()
