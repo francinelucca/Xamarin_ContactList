@@ -23,13 +23,13 @@ Basic Contact List App that supports CRUD operations using Xamarin Forms
 
 ## iOS Visuals (Iphone 8):
 ### Contact List Page
-![ContactList](Images/iOS/ContactListView.png)
+![ContactList](Images/iOS/ContactListView.jpg)
 
 ### Contact Context Menu
-![ContactContextMenu](Images/iOS/ContextActionMenu.png)
+![ContactContextMenu](Images/iOS/ContextActionMenu.jpg)
 
 ### Contact Action Sheet Options
-![ContactActionSheet](Images/iOS/ContactActionSheetMenu.png)
+![ContactActionSheet](Images/iOS/ContactActionSheetMenu.jpg)
 
 ### Contact Edit
-![ContactEdit](Images/iOS/NewContactView.png)
+![ContactEdit](Images/iOS/NewContactView.jpg)
