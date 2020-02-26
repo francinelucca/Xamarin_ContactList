@@ -22,6 +22,7 @@ namespace ContactList.Models
 		public byte[] Image { get; set; }
 		public string Color { get; set; }
 
+        [Ignore]
 		public string fullName
 		{
 			get
@@ -30,6 +31,7 @@ namespace ContactList.Models
 			}
 		}
 
+		[Ignore]
 		public bool hasPicture
 		{
 			get
@@ -38,6 +40,7 @@ namespace ContactList.Models
 			}
 		}
 
+		[Ignore]
 		public string initialLetter
 		{
 			get
@@ -46,6 +49,7 @@ namespace ContactList.Models
 			}
 		}
 
+		[Ignore]
 		public bool isGroupFirst { get; set; }
 	}
 }
