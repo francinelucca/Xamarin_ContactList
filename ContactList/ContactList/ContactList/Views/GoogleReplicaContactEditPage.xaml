@@ -8,8 +8,6 @@
              x:Class="ContactList.Views.GoogleReplicaContactEditPage"
              NavigationPage.HasBackButton="False"
              xmlns:controls="clr-namespace:ContactList.Controls"
-             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             ios:Page.UseSafeArea="true"
             >
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
@@ -38,8 +36,9 @@
                      Text="Save"
                      Priority="0"
                      Command="{Binding CreateContactCommand}"/>
-                <ToolbarItem Order="Secondary"
-                             />
+                <ToolbarItem Order="Primary"
+                             Priority="1"
+                             IconImageSource="Options"/>
             </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <ScrollView>

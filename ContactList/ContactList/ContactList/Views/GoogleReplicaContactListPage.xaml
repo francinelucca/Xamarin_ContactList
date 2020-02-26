@@ -75,7 +75,7 @@
                       >
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <ViewCell Height="0">
+                        <ViewCell Height="1">
                             <Grid/>
                         </ViewCell>
                     </DataTemplate>
