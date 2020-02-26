@@ -6,6 +6,20 @@
              mc:Ignorable="d"
              x:Class="ContactList.App">
     <Application.Resources>
-
+        <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeSolid"
+                        Android="fa-solid-900.ttf#Regular"
+                        iOS="FontAwesome5Free-Solid"
+                      />
+        <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeRegular"
+                        Android="fa-regular-400.ttf#FontAwesome5Free"
+                        iOS="FontAwesome5Free-Regular"
+                      />
+        <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeBrands"
+                        Android="fa-brands-400.ttf#Regular"
+                        iOS="FontAwesome5Brands-Regular"
+                      />
     </Application.Resources>
 </Application>

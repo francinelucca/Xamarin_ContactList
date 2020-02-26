@@ -22,7 +22,8 @@ namespace ContactList
 		public App()
 		{
 			InitializeComponent();
-			MainPage = new NavigationPage(new ContactListPage());
+			MainPage = new NavigationPage(new GoogleReplicaContactListPage());
+		//	MainPage = new NavigationPage(new ContactListPage());
 		}
 		protected override void OnStart()
 		{

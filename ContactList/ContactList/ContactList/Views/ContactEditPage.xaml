@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
             <Entry Placeholder="Name"
-                   Text="{Binding Contact.Name}">
+                   Text="{Binding Contact.FirstName}">
             <Entry.Margin >
                 <OnPlatform x:TypeArguments="Thickness" 
                                         Android="5,0,5,0"
@@ -18,7 +18,7 @@
             </Entry.Margin>
             </Entry>
             <Entry Placeholder="Number"
-                   Text="{Binding Contact.Number}">
+                   Text="{Binding Contact.Phone}">
                 <Entry.Margin >
                     <OnPlatform x:TypeArguments="Thickness" 
                                         Android="5,0,5,0"

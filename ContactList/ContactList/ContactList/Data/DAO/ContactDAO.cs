@@ -21,7 +21,7 @@ namespace ContactList.Data.DAO
 		public SQLiteConnection GetConnection()
 		{
 			SQLiteConnection sqlitConnection;
-			var sqliteFilename = "Contact.db";
+			var sqliteFilename = "Contactv2.db";
 			IFolder folder = FileSystem.Current.LocalStorage;
 			string path = PortablePath.Combine(folder.Path.ToString(), sqliteFilename);
 			sqlitConnection = new SQLiteConnection(path);
@@ -62,6 +62,11 @@ namespace ContactList.Data.DAO
 			{
 				return database.Delete<Contact>(id);
 			}
+		}
+
+		public IEnumerable<Contact> FilterContacts(string searchTerm)
+		{
+			return this.GetContacts().Where(c => c.fullName.Contains(searchTerm));
 		}
 	}
 }

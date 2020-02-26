@@ -21,11 +21,11 @@
                     <DataTemplate>
                         <ViewCell>
                         <StackLayout Margin="20">
-                            <Label Text="{Binding Name}"
+                            <Label Text="{Binding fullName}"
                                    TextColor="Black"
                                    FontAttributes="Bold"
                                    FontSize="20"/>
-                            <Label Text="{Binding Number}"
+                            <Label Text="{Binding Phone}"
                                    TextColor="Gray"/>                            
                         </StackLayout>
                             <ViewCell.ContextActions>

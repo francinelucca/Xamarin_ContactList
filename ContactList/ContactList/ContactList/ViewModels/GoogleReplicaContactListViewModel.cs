@@ -1,9 +1,11 @@
 ﻿using ContactList.Models;
+using ContactList.Utils;
 using ContactList.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -12,7 +14,7 @@ using Xamarin.Forms;
 
 namespace ContactList.ViewModels
 {
-	public class ContactListPageViewModel : INotifyPropertyChanged
+	public class GoogleReplicaContactListPageViewModel : INotifyPropertyChanged
 	{
 		public const string ACTION_EDIT_CONTACT = "Edit";
 		public const string ACTION_CANCEL = "Cancel";
@@ -20,14 +22,17 @@ namespace ContactList.ViewModels
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		public ObservableCollection<Contact> Contacts { get; set; }
-		 
+		public List<ObservableGroupCollection<string, Contact>> GroupedContacts { get; set; }
+
 		public ICommand DeleteContactCommand { get; set; }
 
 		public ICommand MoreOptionsCommand { get; set; }
 
 		public ICommand AddContactCommand { get; set; }
 
-		public ContactListPageViewModel()
+		public String SearchTerm { get; set; }
+
+		public GoogleReplicaContactListPageViewModel()
 		{
 			this.DeleteContactCommand = new Command<Contact>((Contact contact) =>
 			{
@@ -35,9 +40,9 @@ namespace ContactList.ViewModels
 				this.Contacts.Remove(contact);
 			});
 
-			this.AddContactCommand = new Command(async() =>
+			this.AddContactCommand = new Command(async () =>
 			{
-				await App.Current.MainPage.Navigation.PushAsync(new ContactEditPage(null));
+				await App.Current.MainPage.Navigation.PushAsync(new GoogleReplicaContactEditPage(null));
 			});
 
 			this.MoreOptionsCommand = new Command<Contact>(async (Contact contact) =>
@@ -57,13 +62,13 @@ namespace ContactList.ViewModels
 			}
 			else if (action == ACTION_EDIT_CONTACT)
 			{
-				await App.Current.MainPage.Navigation.PushAsync(new ContactEditPage(contact));
+				await App.Current.MainPage.Navigation.PushAsync(new GoogleReplicaContactEditPage(contact));
 			}
 			else if (action == callContactAction)
 			{
 				await this.OpenPhoneDialer(contact.Phone);
 			}
-			}
+		}
 
 		public async Task OpenPhoneDialer(string contactNumber)
 		{
@@ -99,6 +104,26 @@ namespace ContactList.ViewModels
 		protected void GetContacts()
 		{
 			this.Contacts = new ObservableCollection<Contact>(App.Database.GetContacts());
+			GroupContacts();
 		}
+
+		public void SearchContacts()
+		{
+			this.Contacts = new ObservableCollection<Contact>(App.Database.FilterContacts(this.SearchTerm));
+			GroupContacts();
+		}
+
+		protected void GroupContacts()
+		{
+			this.GroupedContacts = this.Contacts
+									.OrderBy(c => c.fullName)
+									.GroupBy(c => c.FirstName[0].ToString())
+									.Select(c => new ObservableGroupCollection<string, Contact>(c)).ToList();
+
+			this.GroupedContacts.ForEach(g => g.ToList().First().isGroupFirst = true); ;
+		}
+
+
+
 	}
 }

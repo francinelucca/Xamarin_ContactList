@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             xmlns:utils="clr-namespace:ContactList.Utils"
+             x:Class="ContactList.Views.GoogleReplicaContactListPage"
+             x:Name="this"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="White">
+    <ContentPage.Resources>
+        <utils:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        <utils:ByteToImageConverter x:Key="imgToSrc"/>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Frame HasShadow="True"
+                   BorderColor="LightGray"
+                   CornerRadius="15"
+                   Margin="0"
+                   Padding="0"
+                   Grid.Row="0"
+                   Grid.Column="0">
+                <StackLayout Orientation="Horizontal"
+                             Padding="5">
+                    <Label FontFamily="{StaticResource FontAwesomeSolid}" 
+                           Text="{x:Static utils:Icon.Menu}"
+                           TextColor="DarkGray"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           Margin="15,0,10,0"/>
+                    <Entry Placeholder="Search Contacts"
+                           TextColor="DarkGray"
+                           FontSize="20"
+                           HorizontalOptions="FillAndExpand"
+                           Margin="0,0,5,0"
+                           TextChanged="ContactsSearch"
+                           Text="{Binding SearchTerm}"/>
+                    <Label FontFamily="{StaticResource FontAwesomeSolid}" 
+                           Text="{x:Static utils:Icon.More}"
+                           TextColor="DarkGray"
+                           FontSize="20"
+                           VerticalOptions="Center"
+                           Margin="0,0,5,0"/>
+                    <Frame Margin="0,0,5,0"
+                           Padding="0"
+                           HeightRequest="40"
+                           WidthRequest="40"
+                           CornerRadius="20"
+                           HorizontalOptions="End"
+                           VerticalOptions="Center"
+                           IsClippedToBounds="True">
+                        <Image Source="ProfilePicture"
+                               Aspect="Fill"/>
+                    </Frame>
+                </StackLayout>
+            </Frame>
+            <ListView ItemsSource="{Binding GroupedContacts}" 
+                      HasUnevenRows="True"
+                      SelectionMode="None"
+                      IsGroupingEnabled="True"
+                      GroupDisplayBinding="{Binding Key}"
+                      GroupShortNameBinding="{Binding Key}"
+                      SeparatorVisibility="None"
+                      Grid.Row="1"
+                      Grid.Column="0"
+                      >
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell Height="0">
+                            <Grid/>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="3*"/>
+                                    <ColumnDefinition Width="10*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding initialLetter}"
+                                       TextColor="#3498db"
+                                       FontAttributes="Bold"
+                                       FontSize="24"
+                                       Margin="10,0,0,0"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       VerticalOptions="Center"
+                                       IsVisible="{Binding isGroupFirst}"/>
+                                <Frame Margin="20,10,0,10"
+                                       Padding="0"
+                                       HeightRequest="60"
+                                       WidthRequest="60"
+                                       CornerRadius="30"
+                                       BackgroundColor="{Binding Color}"
+                                       HorizontalOptions="Start"
+                                       IsClippedToBounds="True"
+                                       Grid.Row="0"
+                                       Grid.Column="1">
+                                    <StackLayout>
+                                        <Label Text="{Binding initialLetter}"
+                                           TextColor="White"
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalOptions="Center"
+                                           FontSize="24"
+                                           IsVisible="{Binding hasPicture, Converter={StaticResource InverseBoolConverter}}"/>
+                                        <Image Source="{Binding Image, Converter={StaticResource imgToSrc}}"
+                                               Aspect="Fill"
+                                               IsVisible="{Binding hasPicture}"/>
+                                    </StackLayout>
+                                </Frame>
+                                <Label Text="{Binding fullName}"
+                                       TextColor="Black"
+                                       FontSize="20"
+                                       VerticalOptions="Center"
+                                       Margin="10,0,0,0"
+                                       Grid.Column="2"
+                                       Grid.Row="0"/>
+                            </Grid>
+                            <ViewCell.ContextActions>
+                                <MenuItem Command="{Binding Path=BindingContext.MoreOptionsCommand,
+                                                                Source={x:Reference this}}"
+                                              CommandParameter="{Binding .}"
+                                              Text="More"/>
+                                <MenuItem Command="{Binding Path=BindingContext.DeleteContactCommand,
+                                                                Source={x:Reference this}}"
+                                              CommandParameter="{Binding .}"
+                                              Text="Delete"
+                                              IsDestructive="True"/>
+                            </ViewCell.ContextActions>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Frame BackgroundColor="#3498db"
+                   HeightRequest="60"
+                   WidthRequest="60"
+                   CornerRadius="30"
+                   Margin="10,0,20,10"
+                   Padding="0"
+                   Grid.Row="1"
+                   Grid.Column="0"
+                   HorizontalOptions="EndAndExpand"
+                   VerticalOptions="EndAndExpand">
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AddContactCommand}"/>
+                </Frame.GestureRecognizers>
+                <Label Text="+"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       FontSize="30"
+                       TextColor="White"/>
+            </Frame>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
