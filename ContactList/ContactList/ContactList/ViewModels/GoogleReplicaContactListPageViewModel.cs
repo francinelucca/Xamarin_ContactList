@@ -38,6 +38,7 @@ namespace ContactList.ViewModels
 			{
 				App.Database.DeleteContact(contact.Id);
 				this.Contacts.Remove(contact);
+				GroupContacts();
 			});
 
 			this.AddContactCommand = new Command(async () =>

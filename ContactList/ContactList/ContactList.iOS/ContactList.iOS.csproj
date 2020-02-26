@@ -73,6 +73,7 @@
     <BundleResource Include="Resources\fa-brands-400.ttf" />
     <Compile Include="CustomRenders\CustomBorderlessEntryRenderer.cs" />
     <Compile Include="CustomRenders\CustomPickerRenderer.cs" />
+    <BundleResource Include="Resources\Options.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
