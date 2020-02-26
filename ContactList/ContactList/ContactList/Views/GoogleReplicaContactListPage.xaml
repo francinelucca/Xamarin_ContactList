@@ -3,12 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:ContactList.Controls"
              mc:Ignorable="d"
              xmlns:utils="clr-namespace:ContactList.Utils"
              x:Class="ContactList.Views.GoogleReplicaContactListPage"
              x:Name="this"
              NavigationPage.HasNavigationBar="False"
-             BackgroundColor="White">
+             BackgroundColor="White"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true">
     <ContentPage.Resources>
         <utils:InverseBoolConverter x:Key="InverseBoolConverter"/>
         <utils:ByteToImageConverter x:Key="imgToSrc"/>
@@ -34,7 +37,7 @@
                            FontSize="20"
                            VerticalOptions="Center"
                            Margin="15,0,10,0"/>
-                    <Entry Placeholder="Search Contacts"
+                    <controls:BorderlessEntry Placeholder="Search Contacts"
                            TextColor="DarkGray"
                            FontSize="20"
                            HorizontalOptions="FillAndExpand"

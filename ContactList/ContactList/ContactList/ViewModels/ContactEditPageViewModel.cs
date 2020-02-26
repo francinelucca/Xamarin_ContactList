@@ -63,9 +63,6 @@ namespace ContactList.ViewModels
 				if (file == null)
 					return;
 
-				await App.Current.MainPage.DisplayAlert("File Location", file.Path, "OK");
-
-
 				using(var memoryStream = new MemoryStream())
 				{
 					file.GetStream().CopyTo(memoryStream);

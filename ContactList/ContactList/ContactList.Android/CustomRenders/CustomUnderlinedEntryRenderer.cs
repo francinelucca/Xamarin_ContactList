@@ -11,16 +11,17 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using ContactList.Controls;
 using ContactList.Droid.CustomRenders;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
+[assembly: ExportRenderer(typeof(UnderlinedEntry), typeof(CustomUnderlinedEntryRenderer))]
 namespace ContactList.Droid.CustomRenders
 {
-    public class CustomEntryRenderer : EntryRenderer
+    public class CustomUnderlinedEntryRenderer : EntryRenderer
     {
-        public CustomEntryRenderer(Context context)
+        public CustomUnderlinedEntryRenderer(Context context)
             : base(context)
         {
         }

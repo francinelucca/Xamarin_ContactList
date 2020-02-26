@@ -3,21 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:ContactList.Controls"
              mc:Ignorable="d"
              x:Class="ContactList.Views.ContactEditPage"
              Title="{Binding ViewTitle}">
     <ContentPage.Content>
         <StackLayout VerticalOptions="FillAndExpand">
-            <Entry Placeholder="Name"
-                   Text="{Binding Contact.FirstName}">
+            <controls:UnderlinedEntry Placeholder="Name"
+                                      Text="{Binding Contact.FirstName}">
             <Entry.Margin >
                 <OnPlatform x:TypeArguments="Thickness" 
                                         Android="5,0,5,0"
                                         iOS="5,10,5,0"
                                         />
             </Entry.Margin>
-            </Entry>
-            <Entry Placeholder="Number"
+            </controls:UnderlinedEntry>
+            <controls:UnderlinedEntry Placeholder="Number"
                    Text="{Binding Contact.Phone}">
                 <Entry.Margin >
                     <OnPlatform x:TypeArguments="Thickness" 
@@ -25,7 +26,7 @@
                                         iOS="5,10,5,0"
                                         />
                 </Entry.Margin>
-            </Entry>
+            </controls:UnderlinedEntry>
             <Button Text="Add"
                     TextColor="White"
                     Command="{Binding CreateContactCommand}"

@@ -18,7 +18,11 @@ namespace ContactList.Utils
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            ImageSource img = value != null ? this.ConvertByteArrayToImageSource(value as byte[])  : "camera";
+            ImageSource img = null;
+            if(value != null)
+            {
+                img = this.ConvertByteArrayToImageSource(value as byte[]);
+            }
             return img;
         }
 

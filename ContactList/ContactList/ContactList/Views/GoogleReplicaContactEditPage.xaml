@@ -7,6 +7,9 @@
              xmlns:utils="clr-namespace:ContactList.Utils"
              x:Class="ContactList.Views.GoogleReplicaContactEditPage"
              NavigationPage.HasBackButton="False"
+             xmlns:controls="clr-namespace:ContactList.Controls"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
             >
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal">
@@ -14,7 +17,7 @@
                    Text="{x:Static utils:Icon.Close}"
                    FontSize="20"
                    TextColor="#3d3d3d"
-                   VerticalOptions="Center">
+                   VerticalOptions="CenterAndExpand">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
                 </Label.GestureRecognizers>
@@ -23,10 +26,11 @@
                    TextColor="#3d3d3d"
                    Margin="20,0,0,0"
                    FontSize="20"
-                   VerticalOptions="Center"/>
+                   VerticalOptions="CenterAndExpand"/>
         </StackLayout>
     </NavigationPage.TitleView>
     <ContentPage.Resources>
+        <utils:InverseBoolConverter x:Key="InverseBoolConverter"/>
         <utils:ByteToImageConverter x:Key="imgToSrc"/>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -63,7 +67,8 @@
                              Grid.Row="0"
                              Grid.Column="0"
                              Grid.ColumnSpan="4"
-                             Padding="20,10">
+                             Padding="20,10"
+                             Margin="0">
                     <Label Text="Save to"
                            TextColor="#3d3d3d"
                            FontSize="18"
@@ -71,9 +76,13 @@
                            VerticalOptions="Center"
                            Margin="0,0,5,0"/>
                     <Frame BackgroundColor="White"
-                           CornerRadius="40"
                            Margin="0"
                            Padding="0">
+                        <Frame.CornerRadius>
+                            <OnPlatform x:TypeArguments="x:Single"
+                                        Android="40"
+                                        iOS="20"/>
+                        </Frame.CornerRadius>
                         <StackLayout Orientation="Horizontal"
                                      Padding="10">
                             <Frame WidthRequest="30"
@@ -120,8 +129,17 @@
                     </Frame.GestureRecognizers>
                     <StackLayout>
                         <Image Source="{Binding Contact.Image, Converter={StaticResource imgToSrc}}"
-                               HeightRequest="60"
-                               VerticalOptions="CenterAndExpand"/>
+                               VerticalOptions="CenterAndExpand"
+                               Aspect="Fill"
+                               IsVisible="{Binding Contact.hasPicture}"
+                               />
+                        <Label FontFamily="{StaticResource FontAwesomeSolid}" 
+                               Text="{x:Static utils:Icon.Camera}"
+                               FontSize="20"
+                               TextColor="White"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="CenterAndExpand"
+                               IsVisible="{Binding Contact.hasPicture, Converter={StaticResource InverseBoolConverter}}"/>
                     </StackLayout>
                 </Frame>
                 <Label FontFamily="{StaticResource FontAwesomeRegular}" 
@@ -132,16 +150,27 @@
                    Grid.Column="0"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
-                   Margin="20,0,0,0"
-                    />
-                <Entry Placeholder="First name"
+                    >
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="20,0,0,0"
+                                    iOS="20,20,0,0"/>
+                    </Label.Margin>
+                 </Label>
+                <controls:UnderlinedEntry Placeholder="First name"
                    TextColor="Gray"
                    Grid.Row="2"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    VerticalOptions="Center"
                    Text="{Binding Contact.FirstName}"
-                   />
+                   >
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="0,0,0,0"
+                                    iOS="0,20,0,0"/>
+                    </Entry.Margin>
+                 </controls:UnderlinedEntry>
                 <Label FontFamily="{StaticResource FontAwesomeSolid}" 
                    Text="{x:Static utils:Icon.ChevronDown}"
                    FontSize="20"
@@ -152,14 +181,20 @@
                    HorizontalOptions="Center"
                    Margin="0,0,20,0"
                     />
-                <Entry Placeholder="Last name"
+                <controls:UnderlinedEntry Placeholder="Last name"
                    TextColor="Gray"
                    Grid.Row="3"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    VerticalOptions="Center"
                    Text="{Binding Contact.LastName}"
-                   />
+                   >
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="0,0,0,0"
+                                    iOS="0,20,0,0"/>
+                    </Entry.Margin>
+                 </controls:UnderlinedEntry>
                 <Label FontFamily="{StaticResource FontAwesomeRegular}" 
                    Text="{x:Static utils:Icon.Company}"
                    FontSize="20"
@@ -168,17 +203,27 @@
                    Grid.Column="0"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
-                   Margin="20,10,0,0"
-                    />
-                <Entry Placeholder="Company"
+                   >
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="20,10,0,0"
+                                    iOS="20,30,0,0"/>
+                    </Label.Margin>
+                 </Label>
+                <controls:UnderlinedEntry Placeholder="Company"
                    TextColor="Gray"
                    Grid.Row="4"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    VerticalOptions="Center"
-                   Margin="0,10,0,0"
                    Text="{Binding Contact.Company}"
-                   />
+                   >
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="0,10,0,0"
+                                    iOS="0,30,0,0"/>
+                    </Entry.Margin>
+                 </controls:UnderlinedEntry>
                 <Label FontFamily="{StaticResource FontAwesomeSolid}" 
                    Text="{x:Static utils:Icon.Phone}"
                    FontSize="20"
@@ -187,17 +232,27 @@
                    Grid.Column="0"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
-                   Margin="20,10,0,0"
-                    />
-                <Entry Placeholder="Phone"
+                   >
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="20,10,0,0"
+                                    iOS="20,30,0,0"/>
+                    </Label.Margin>
+                 </Label>
+                <controls:UnderlinedEntry Placeholder="Phone"
                    TextColor="Gray"
                    Grid.Row="5"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    VerticalOptions="Center"
-                   Margin="0,10,0,0"
                    Text="{Binding Contact.Phone}"
-                   />
+                   >
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="0,10,0,0"
+                                    iOS="0,30,0,0"/>
+                    </Entry.Margin>
+                 </controls:UnderlinedEntry>
                 <Picker Title="Mobile"
                     Grid.Row="6"
                     Grid.Column="1"
@@ -216,6 +271,11 @@
                             <x:String>Other</x:String>
                         </x:Array>
                     </Picker.ItemsSource>
+                    <Picker.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="0,0,0,0"
+                                    iOS="0,10,0,0"/>
+                    </Picker.Margin>
                 </Picker>
                 <Label FontFamily="{StaticResource FontAwesomeSolid}" 
                    Text="{x:Static utils:Icon.Picker}"
@@ -235,17 +295,27 @@
                    Grid.Column="0"
                    VerticalOptions="Center"
                    HorizontalOptions="Center"
-                   Margin="20,10,0,0"
-                    />
-                <Entry Placeholder="Email"
+                   >
+                    <Label.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="20,10,0,0"
+                                    iOS="20,30,0,0"/>
+                    </Label.Margin>
+                 </Label>
+                <controls:UnderlinedEntry Placeholder="Email"
                    TextColor="Gray"
                    Grid.Row="7"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"
                    VerticalOptions="Center"
-                   Margin="0,10,0,0"
                    Text="{Binding Contact.Email}"
-                   />
+                   >
+                    <Entry.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="0,10,0,0"
+                                    iOS="0,30,0,0"/>
+                    </Entry.Margin>
+                 </controls:UnderlinedEntry>
                 <Picker Title="Home"
                     Grid.Row="8"
                     Grid.Column="1"
@@ -259,6 +329,11 @@
                             <x:String>Other</x:String>
                         </x:Array>
                     </Picker.ItemsSource>
+                    <Picker.Margin>
+                        <OnPlatform x:TypeArguments="Thickness"
+                                    Android="0,0,0,0"
+                                    iOS="0,10,0,0"/>
+                    </Picker.Margin>
                 </Picker>
                 <Label FontFamily="{StaticResource FontAwesomeSolid}" 
                    Text="{x:Static utils:Icon.Picker}"

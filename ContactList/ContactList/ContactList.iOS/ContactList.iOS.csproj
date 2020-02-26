@@ -62,7 +62,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="CustomRenders\CustomEntryRenderer.cs" />
+    <Compile Include="CustomRenders\CustomUnderlinedEntryRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -71,6 +71,8 @@
     <BundleResource Include="Resources\fa-regular-400.ttf" />
     <BundleResource Include="Resources\fa-solid-900.ttf" />
     <BundleResource Include="Resources\fa-brands-400.ttf" />
+    <Compile Include="CustomRenders\CustomBorderlessEntryRenderer.cs" />
+    <Compile Include="CustomRenders\CustomPickerRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -132,7 +134,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\ContactList\ContactList.csproj">
-      <Project>{03283071-E84F-4437-A16A-C6257BAC94B7}</Project>
+      <Project>{95E19563-6674-4A59-9A7B-1A5B1EC50D8B}</Project>
       <Name>ContactList</Name>
     </ProjectReference>
   </ItemGroup>
