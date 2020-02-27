@@ -13,11 +13,11 @@ namespace ContactList.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class GoogleReplicaContactListPage : ContentPage
 	{
-		private GoogleReplicaContactListPageViewModel Vm;
+		private ContactListPageViewModel Vm;
 		public GoogleReplicaContactListPage()
 		{
 			InitializeComponent();
-			this.BindingContext = this.Vm = new GoogleReplicaContactListPageViewModel();
+			this.BindingContext = this.Vm = new ContactListPageViewModel(true);
 		}
 		protected async override void OnAppearing()
 		{
