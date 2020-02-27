@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using ZXing.Net.Mobile.Forms;
 
 namespace ContactList.ViewModels
 {
@@ -29,6 +30,8 @@ namespace ContactList.ViewModels
 		public ICommand MoreOptionsCommand { get; set; }
 
 		public ICommand AddContactCommand { get; set; }
+
+		public ICommand OpenScannerCommand { get; set; }
 
 		public String SearchTerm { get; set; }
 
@@ -49,6 +52,12 @@ namespace ContactList.ViewModels
 			this.MoreOptionsCommand = new Command<Contact>(async (Contact contact) =>
 			{
 				await this.ShowActionSheetWithOptions(contact);
+			});
+
+
+			this.OpenScannerCommand = new Command(() =>
+			{
+				this.OpenScanner();
 			});
 		}
 
@@ -123,6 +132,42 @@ namespace ContactList.ViewModels
 
 			this.GroupedContacts.ForEach(g => g.ToList().First().isGroupFirst = true); ;
 		}
+
+		public async void OpenScanner()
+		{
+
+			var ScannerPage = new ZXingScannerPage();
+			ScannerPage.IsScanning = true;
+
+			ScannerPage.OnScanResult += (result) => {
+
+				ScannerPage.IsScanning = false;
+
+				Device.BeginInvokeOnMainThread(async () => {
+					string[] values = result.Text.Split('*');
+					if (values.Length == 3)
+					{
+						Contact contact = new Contact();
+						contact.FirstName = values[0];
+						contact.LastName = values[1];
+						contact.Phone = values[2];
+						contact.Color = GoogleColors.GetRandomColor();
+						App.Database.SaveContact(contact);
+					}
+					else
+					{
+						await App.Current.MainPage.DisplayAlert("Invalid QR Code Scanned", "Couldn't load contact data from scanned QR Code", "OK");
+
+					}
+					await App.Current.MainPage.Navigation.PopAsync();
+				});
+			};
+
+
+			await App.Current.MainPage.Navigation.PushAsync(ScannerPage);
+		}
+
+
 
 
 

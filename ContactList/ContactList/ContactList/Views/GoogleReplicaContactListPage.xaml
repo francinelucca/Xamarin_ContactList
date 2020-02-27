@@ -143,16 +143,27 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Frame BackgroundColor="#3498db"
-                   HeightRequest="60"
-                   WidthRequest="60"
-                   CornerRadius="30"
-                   Margin="10,0,20,10"
-                   Padding="0"
+            <StackLayout 
                    Grid.Row="1"
                    Grid.Column="0"
                    HorizontalOptions="EndAndExpand"
                    VerticalOptions="EndAndExpand">
+                <Label FontFamily="{StaticResource FontAwesomeSolid}" 
+                   Text="{x:Static utils:Icon.Barcode}"
+                   FontSize="40"
+                   TextColor="#3d3d3d"
+                   HorizontalOptions="EndAndExpand"
+                   Margin="10,0,28,10">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OpenScannerCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Frame BackgroundColor="#3498db"
+                   HeightRequest="60"
+                   WidthRequest="60"
+                   CornerRadius="30"
+                   Margin="10,0,20,10"
+                   Padding="0">
                 <Frame.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding AddContactCommand}"/>
                 </Frame.GestureRecognizers>
@@ -161,7 +172,8 @@
                        HorizontalOptions="Center"
                        FontSize="30"
                        TextColor="White"/>
-            </Frame>
+                </Frame>
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

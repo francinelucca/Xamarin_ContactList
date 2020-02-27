@@ -30,5 +30,6 @@ namespace ContactList.Utils
         public static readonly string Email = "\uf0e0";
         public static readonly string Menu = "\uf0c9";
         public static readonly string More = "\uf142";
+        public static readonly string Barcode = "\uf02a";
     }
 }
